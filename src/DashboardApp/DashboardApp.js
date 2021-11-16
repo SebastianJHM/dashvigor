@@ -169,8 +169,9 @@ function DashboardApp() {
 
                     <div id="s2">
                         <Routes>
-                            <Route exact path="/" element={<Navigate to="/home" />} />
-                            <Route exact path="/home" element={
+                            <Route path="/" element={<Navigate to="/home" />} />
+                            <Route path="/*" element={<Navigate to="/home" />} />
+                            <Route path="/home" element={
                                 <Home
                                     dataEdad={data["dataEdad"]}
                                     dataGenero={data["dataGenero"]}
