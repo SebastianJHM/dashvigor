@@ -1,0 +1,8 @@
+.barRiesgoSocial {
+    min-width: 500px;
+    width: 70%;
+    background-color: rgb(221, 221, 221);
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+}

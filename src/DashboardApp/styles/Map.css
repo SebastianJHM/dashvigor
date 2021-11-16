@@ -1,0 +1,10 @@
+.map-layer {
+    fill: #fff;
+    stroke: rgb(90, 90, 90);
+    
+}
+
+.label-dep {
+    font-weight: bolder;
+}
+
