@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/dashvigor/static/css/main.f439c920.chunk.css",
-    "main.js": "/dashvigor/static/js/main.3fb0cb51.chunk.js",
-    "main.js.map": "/dashvigor/static/js/main.3fb0cb51.chunk.js.map",
+    "main.js": "/dashvigor/static/js/main.6f43fd62.chunk.js",
+    "main.js.map": "/dashvigor/static/js/main.6f43fd62.chunk.js.map",
     "runtime-main.js": "/dashvigor/static/js/runtime-main.bc98aa9c.js",
     "runtime-main.js.map": "/dashvigor/static/js/runtime-main.bc98aa9c.js.map",
-    "static/js/2.a3073f36.chunk.js": "/dashvigor/static/js/2.a3073f36.chunk.js",
-    "static/js/2.a3073f36.chunk.js.map": "/dashvigor/static/js/2.a3073f36.chunk.js.map",
+    "static/js/2.85d6e685.chunk.js": "/dashvigor/static/js/2.85d6e685.chunk.js",
+    "static/js/2.85d6e685.chunk.js.map": "/dashvigor/static/js/2.85d6e685.chunk.js.map",
     "index.html": "/dashvigor/index.html",
     "static/css/main.f439c920.chunk.css.map": "/dashvigor/static/css/main.f439c920.chunk.css.map",
-    "static/js/2.a3073f36.chunk.js.LICENSE.txt": "/dashvigor/static/js/2.a3073f36.chunk.js.LICENSE.txt",
+    "static/js/2.85d6e685.chunk.js.LICENSE.txt": "/dashvigor/static/js/2.85d6e685.chunk.js.LICENSE.txt",
     "static/media/bar-chart-line-fill.5a41b6ec.svg": "/dashvigor/static/media/bar-chart-line-fill.5a41b6ec.svg",
     "static/media/delete.9137dae7.svg": "/dashvigor/static/media/delete.9137dae7.svg",
     "static/media/menu-icon.9dbc5a3a.svg": "/dashvigor/static/media/menu-icon.9dbc5a3a.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.bc98aa9c.js",
-    "static/js/2.a3073f36.chunk.js",
+    "static/js/2.85d6e685.chunk.js",
     "static/css/main.f439c920.chunk.css",
-    "static/js/main.3fb0cb51.chunk.js"
+    "static/js/main.6f43fd62.chunk.js"
   ]
 }
