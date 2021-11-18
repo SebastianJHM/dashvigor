@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/dashvigor/static/css/main.2d6fd6cf.chunk.css",
-    "main.js": "/dashvigor/static/js/main.c821ca58.chunk.js",
-    "main.js.map": "/dashvigor/static/js/main.c821ca58.chunk.js.map",
+    "main.js": "/dashvigor/static/js/main.54523c11.chunk.js",
+    "main.js.map": "/dashvigor/static/js/main.54523c11.chunk.js.map",
     "runtime-main.js": "/dashvigor/static/js/runtime-main.bc98aa9c.js",
     "runtime-main.js.map": "/dashvigor/static/js/runtime-main.bc98aa9c.js.map",
     "static/js/2.cab59628.chunk.js": "/dashvigor/static/js/2.cab59628.chunk.js",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.bc98aa9c.js",
     "static/js/2.cab59628.chunk.js",
     "static/css/main.2d6fd6cf.chunk.css",
-    "static/js/main.c821ca58.chunk.js"
+    "static/js/main.54523c11.chunk.js"
   ]
 }
