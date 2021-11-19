@@ -6,6 +6,7 @@ function BarChart(props) {
     defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif";
     defaults.font.weight = "bolder";
     defaults.color = "rgb(0,0,0)";
+    defaults.animation.duration = 0;
 
     const state = {
         labels: props.data.x,

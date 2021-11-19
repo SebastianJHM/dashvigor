@@ -31,12 +31,13 @@ function Map(props) {
 
     function mouseOverDep(e) {
         console.log(e.target)
-        setSelectedDep({label: e.target.attributes.datadeplabel.value, frecuencia: data[e.target.attributes.datadep.value]["frecuencia"]});
         if (e.target.attributes.dataindex.value === "32") {
+            setSelectedDep({label: e.target.attributes.datadeplabel.value, frecuencia: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["frecuencia"]});
             document.querySelectorAll('path[dataindex="32"]').forEach(function (x) {
                 x.style.fill = "rgb(90, 90, 90)";
-            })
+            });
         } else {
+            setSelectedDep({label: e.target.attributes.datadeplabel.value, frecuencia: data[e.target.attributes.datadep.value]["frecuencia"]});
             e.target.style.fill = "rgb(90, 90, 90)";
         }
     }
@@ -46,7 +47,7 @@ function Map(props) {
         if (e.target.attributes.dataindex.value === "32") {
             document.querySelectorAll('path[dataindex="32"]').forEach(function (x) {
                 x.style.fill = colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]);
-            })
+            });
         } else {
             e.target.style.fill = colorScale(data[e.target.attributes.datadep.value]["color"]);
         }
