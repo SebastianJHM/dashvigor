@@ -2,8 +2,8 @@ import React from "react";
 import "../styles/Usca.css"
 
 function Usca(props) {
-    if (!props.data) {
-        return(<h1>loading...</h1>)
+    if (!props.data || !props.dataContestadas) {
+        return(<h1>cargando...</h1>)
     }
     const w = props.data.meanUsca;
     return(

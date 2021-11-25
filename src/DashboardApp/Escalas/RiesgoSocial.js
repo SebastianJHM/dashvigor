@@ -3,18 +3,18 @@ import "../styles/RiesgoSocial.css";
 import { GroupedBarRiesgoSocial } from "./Charts/GroupedBarRiesgoSocial.js";
 
 function RiesgoSocial(props) {
-    if (!props.data) {
-        return(<h1>loading...</h1>)
+    if (!props.data || !props.dataContestadas) {
+        return(<h1>cargando...</h1>);
     }
 
-    const r = {labels: [], data1: [], data2: [], percentages1: [], percentages2: []}
+    const r = {labels: [], data1: [], data2: [], percentages1: [], percentages2: []};
     Object.entries(props.data).forEach(function([t, data]) {
         r.labels.push(t);
         r.data1.push(data.y[0]);
         r.data2.push(data.y[1]);
         r.percentages1.push(parseFloat(100*data.y[0]/(data.y[0]+data.y[1])).toFixed(2));
         r.percentages2.push(parseFloat(100*data.y[1]/(data.y[0]+data.y[1])).toFixed(2));
-    })
+    });
     const contestadas = props.dataContestadas["contestadas"];
     const totalContestadas = props.dataContestadas["totalContestadas"];
     return (

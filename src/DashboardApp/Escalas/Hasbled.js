@@ -3,8 +3,8 @@ import { BarChart } from "./Charts/BarChart.js"
 import "../styles/Hasbled.css"
 
 function Hasbled(props) {
-    if (!props.data) {
-        return(<h1>loading...</h1>)
+    if (!props.data || !props.dataContestadas) {
+        return(<h1>cargando...</h1>)
     }
 
     const t = props.data.y.reduce((acum, x) => (acum + x), 0);

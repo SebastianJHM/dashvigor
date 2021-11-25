@@ -3,8 +3,8 @@ import "../styles/Tamizaje.css"
 import { GroupedBarTamizaje } from "./Charts/GroupedBarTamizaje";
 
 function Tamizaje(props) {
-    if (!props.data) {
-        return(<h1>loading...</h1>)
+    if (!props.data || !props.dataContestadas) {
+        return(<h1>cargando...</h1>)
     }
    
     const pruebasTam = [

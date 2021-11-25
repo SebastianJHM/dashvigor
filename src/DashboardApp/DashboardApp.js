@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { loadGoogleSpreadsheet } from "./Service/service.js";
+import { loadData } from "./Service/service.js";
 
 import { Home } from "./Escalas/Home.js";
 import { MMS } from './Escalas/MMS.js';
@@ -37,14 +37,27 @@ import { UI } from './UI.js';
 
 
 function DashboardApp() {
+    const [errorService, setErrorService] = React.useState(false);
     const [data, setData] = React.useState({});
+
     React.useEffect(function () {
-        async function loadData() {
-            const d = await loadGoogleSpreadsheet();
-            setData(d);
+        async function callService() {
+            try {
+                const d = await loadData();
+                setData(d);
+            }
+            catch (e) {
+                console.log(e);
+                setErrorService(true);
+            }
+            
         }
-        loadData();
+        callService();
     }, []);
+
+    if (errorService) {
+        console.log("algo salió mal con el servicio");
+    }
 
     return (
         <Routes>
@@ -66,7 +79,7 @@ function DashboardApp() {
                         dataEspecialidadMedico={data["dataEspecialidadMedico"]}
                     />}
                 />
-                <Route path="tamizaje" element={<Tamizaje title={"Pruebas de Tamizaje"} data={data["dataTamizaje"]} dataContestadas={data["dataContestadas"] && data["dataContestadas"]["Tamizaje"]} />} />
+                <Route path="tamizaje" element={<Tamizaje data={data["dataTamizaje"]} dataContestadas={data["dataContestadas"] && data["dataContestadas"]["Tamizaje"]} />} />
                 <Route path="mms" element={<MMS data={data["dataMMS"]} dataContestadas={data["dataContestadas"] && data["dataContestadas"]["MMS"]} />} />
                 <Route path="barthel" element={<Barthel data={data["dataBarthel"]} dataContestadas={data["dataContestadas"] && data["dataContestadas"]["Barthel"]} />} />
                 <Route path="lawtonbrody" element={<LawtonBrody data={data["dataLawtonBrody"]} dataContestadas={data["dataContestadas"] && data["dataContestadas"]["LawtonBrody"]} />} />

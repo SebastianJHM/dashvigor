@@ -6,7 +6,7 @@ function MMS(props) {
 
 
     if (!props.data || !props.dataContestadas) {
-        return(<h1>loading...</h1>)
+        return(<h1>cargando...</h1>)
     }
 
     const t = props.data.y.reduce((acum, x) => (acum + x), 0);
