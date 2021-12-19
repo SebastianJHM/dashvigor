@@ -40,6 +40,8 @@ function Tamizaje(props) {
 
     const contestadas = props.dataContestadas["contestadas"];
     const totalContestadas = props.dataContestadas["totalContestadas"];
+
+    console.log(Object.entries(props.data.preguntas))
     return(
         <>
             <h1>Pruebas de Tamizaje</h1>
@@ -52,19 +54,38 @@ function Tamizaje(props) {
             <div className="tam-res-container">
                 <GroupedBarTamizaje labels={props.data.resumen.l} data1={props.data.resumen.x1} data2={props.data.resumen.x2} />
             </div>
+            
+            <h2 style={{fontSize: "1.4rem", marginTop: "2rem"}}>&bull; Tabla de frecuencias por categorías</h2>
             <p style={{fontStyle: "italic"}}>Esta escala la contestaron {contestadas} de {totalContestadas} pacientes de VIGOR.</p>
+            <div className="table-container">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th rowSpan="2">Sustancia</th>
+                            <th colSpan="2">Frec. Absoluta</th>
+                            <th colSpan="2">Frec. Relativa</th>
+                        </tr>
+                        <tr>
+                            <th>Si</th>
+                            <th>No</th>
+                            <th>Si</th>
+                            <th>No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Object.entries(props.data.preguntas).map(([key, value]) => (
+                            <tr key={key}>
+                                <td>{`P${key}`}</td>
+                                <td>{value.y[0]}</td>
+                                <td>{value.y[1]}</td>
+                                <td>{parseFloat(100*value.y[0]/(value.y[0]+value.y[1])).toFixed(2)}%</td>
+                                <td>{parseFloat(100*value.y[1]/(value.y[0]+value.y[1])).toFixed(2)}%</td>
+                            </tr>
 
-            {/*<h2 style={{fontSize: "2rem", margin: "10px 0", textAlign: "center"}}>Resultado por pregunta</h2>
-            <div className="tam-charts">
-                {Object.entries(props.data.preguntas).map(([preg, data]) => (
-                    <div style={{display: "flex", flexDirection: "column"}}>
-                        <h2 style={{marginBottom: "5px"}}>Pregunta {preg}</h2>
-                        <div key={preg} className="tam-container">
-                            <DoughnutChart title={`Pregunta ${preg}`} data={data} />
-                        </div>
-                    </div>
-                ))}
-                </div>*/}
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }

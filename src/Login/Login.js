@@ -21,7 +21,6 @@ function Login(props) {
 
     async function verificarContrasenna() {
         const digestBuffer = await digestMessage(contrasenaIngresada);
-        console.log(process.env.REACT_APP_PW)
         if (digestBuffer === process.env.REACT_APP_PW) {
             props.setLoggedIn(true);
             navigate('/dashvigor/');

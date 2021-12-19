@@ -19,37 +19,63 @@ function Map(props) {
     const projectionSanAndres = geoMercator().scale(19000).center([-81.7, 12.6]).translate([50, 30]);
     const projectionProvidencia = geoMercator().scale(19000).center([-81.3, 13.35]).translate([90, 52]);
 
-    const path_ = geoPath().projection(projection);
+    const path = geoPath().projection(projection);
     const pathSanAndres = geoPath().projection(projectionSanAndres);
     const pathProvidencia = geoPath().projection(projectionProvidencia);
     const colorScale = scaleLinear().domain([0, 1]).clamp(true).range(['rgb(255, 255, 255)', 'green']);
 
 
-    const MAP = require("../../assets/GeoJSONColombia.json");
-    const SanAndres = MAP.features[MAP.features.length - 2];
-    const Providencia = MAP.features[MAP.features.length - 1];
+    const mapJson = require("../../assets/GeoJSONColombia.json");
+    const SanAndres = mapJson.features[mapJson.features.length - 2];
+    const Providencia = mapJson.features[mapJson.features.length - 1];
 
-    function mouseOverDep(e) {
-        console.log(e.target)
-        if (e.target.attributes.dataindex.value === "32") {
-            setSelectedDep({label: e.target.attributes.datadeplabel.value, frecuencia: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["frecuencia"]});
-            document.querySelectorAll('path[dataindex="32"]').forEach(function (x) {
+    const mapaColombia = [];
+    mapJson.features.slice(0, -2).forEach(function (dep) {
+        mapaColombia.push({ 
+            d: path(dep), 
+            color: colorScale(data[dep.properties.NOMBRE_DPT]["color"]), 
+            numDep: dep.properties.DPTO,
+            label: data[dep.properties.NOMBRE_DPT]["label"],
+            frecuencia: data[dep.properties.NOMBRE_DPT]["frecuencia"],
+        });
+    });
+    mapaColombia.push({ 
+        d: pathSanAndres(SanAndres), 
+        color: colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]), 
+        numDep: SanAndres.properties.DPTO,
+        label: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["label"],
+        frecuencia: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["frecuencia"],
+    });
+    mapaColombia.push({ 
+        d: pathProvidencia(Providencia), 
+        color: colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]), 
+        numDep: Providencia.properties.DPTO,
+        label: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["label"],
+        frecuencia: data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["frecuencia"],
+    });
+
+    function mouseOverDep(ev) {
+        setSelectedDep({ 
+            label: ev.target.attributes.datadeplabel.value, 
+            frecuencia: ev.target.attributes.datadepfrecuencia.value 
+        });
+        if (ev.target.attributes.datadepnum.value === "88") {
+            document.querySelectorAll('path[datadepnum="88"]').forEach(function (x) {
                 x.style.fill = "rgb(90, 90, 90)";
             });
         } else {
-            setSelectedDep({label: e.target.attributes.datadeplabel.value, frecuencia: data[e.target.attributes.datadep.value]["frecuencia"]});
-            e.target.style.fill = "rgb(90, 90, 90)";
+            ev.target.style.fill = "rgb(90, 90, 90)";
         }
     }
 
-    function mouseOutDep(e) {
+    function mouseOutDep(ev, color) {
         setSelectedDep(null);
-        if (e.target.attributes.dataindex.value === "32") {
-            document.querySelectorAll('path[dataindex="32"]').forEach(function (x) {
-                x.style.fill = colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]);
+        if (ev.target.attributes.datadepnum.value === "88") {
+            document.querySelectorAll('path[datadepnum="88"]').forEach(function (x) {
+                x.style.fill = color;
             });
         } else {
-            e.target.style.fill = colorScale(data[e.target.attributes.datadep.value]["color"]);
+            ev.target.style.fill = color;
         }
     }
 
@@ -59,43 +85,18 @@ function Map(props) {
             <svg width={chart_width} height={chart_height} viewBox={`0 0 ${chart_width} ${chart_height}`}>
                 <g>
                     <g className="map-layer">
-                        {MAP.features.slice(0, -2).map((dep, i) => (
+                        {mapaColombia.map((dep, i) => (
                             <path
-                                key={dep.properties.NOMBRE_DPT}
-                                d={path_(dep)}
-                                datadep={dep.properties.NOMBRE_DPT}
-                                dataindex={i}
-                                datadeplabel={data[dep.properties.NOMBRE_DPT]["label"]}
-                                vectorEffect="non-scaling-stroke"
-                                style={{ fill: colorScale(data[dep.properties.NOMBRE_DPT]["color"]) }}
+                                key={i}
+                                d={dep.d}
+                                style={{ fill: dep.color }}
+                                datadeplabel={dep.label}
+                                datadepnum = {dep.numDep}
+                                datadepfrecuencia = {dep.frecuencia}
                                 onMouseOver={mouseOverDep}
-                                onMouseOut={mouseOutDep}
+                                onMouseOut={(ev) => (mouseOutDep(ev, dep.color))}
                             />
                         ))}
-
-                        <path
-                            key={SanAndres.properties.NOMBRE_DPT}
-                            d={pathSanAndres(SanAndres)}
-                            datadep={SanAndres.properties.NOMBRE_DPT}
-                            dataindex={32}
-                            datadeplabel="San Andrés y Providencia"
-                            vectorEffect="non-scaling-stroke"
-                            style={{ fill: colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]) }}
-                            onMouseOver={mouseOverDep}
-                            onMouseOut={mouseOutDep}
-                        />
-
-                        <path
-                            key={Providencia.properties.NOMBRE_DPT}
-                            d={pathProvidencia(Providencia)}
-                            datadep={Providencia.properties.NOMBRE_DPT}
-                            dataindex={32}
-                            datadeplabel="San Andrés y Providencia"
-                            vectorEffect="non-scaling-stroke"
-                            style={{ fill: colorScale(data["ARCHIPIELAGO DE SAN ANDRES PROVIDENCIA Y SANTA CATALINA"]["color"]) }}
-                            onMouseOver={mouseOverDep}
-                            onMouseOut={mouseOutDep}
-                        />
 
                         {selectedDep &&
                             <g transform={"translate(250,120)"}>
